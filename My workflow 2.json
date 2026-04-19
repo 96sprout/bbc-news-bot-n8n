@@ -1,0 +1,98 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -32,
+        -16
+      ],
+      "id": "6063cdd4-d3fb-4db2-ba0f-fc0faee50302",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "http://feeds.bbci.co.uk/news/world/rss.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        400,
+        -48
+      ],
+      "id": "22d73c51-48f6-4f13-ac2f-353ed240cbad",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "sendTo": "1tissotsprout@gmail.com",
+        "subject": "Daily BBC News",
+        "message": "=Good Morning! Here are today's BBC News headlines Your Badsha: {{ $json.data }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        256
+      ],
+      "id": "77a7960e-fc10-4005-bead-d7e520de3a4e",
+      "name": "Send a message",
+      "webhookId": "c6632cf0-d497-4517-896e-107145e6299a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "TNrNqT5juMUQVTt1",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "55a47775-d876-4c1a-99ce-7ee6da27f2af",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e06663ae30a429cdcd2f6936c01f859272a10ef97b23781ee70d6be3be80d9b1"
+  },
+  "id": "y6h0V7gdSKCMMIzE",
+  "tags": []
+}
